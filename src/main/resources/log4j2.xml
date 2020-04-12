@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" debug="false">
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{10} - %msg%n"/>
+        </Console>
+
+        <RollingFile name="APiTestRunLog" fileName="logs/apitestlog.txt"
+                     filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %p %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="GuiTestRunLog" fileName="logs/guitestlog.txt"
+                     filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %p %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+
+<!--        <Async name="async_appender">-->
+<!--            <AppenderRef ref="TestLogFile" />-->
+<!--            <AppenderRef ref="CalcLogFile" />-->
+<!--        </Async>-->
+
+    </Appenders>
+
+
+    <Loggers>
+
+        <Root level="TRACE">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="ApiTestRunLog"/>
+            <AppenderRef ref="GuiTestRunLog"/>
+        </Root>
+
+<!--        <Logger name= "org.example.TestFib" level="TRACE" additivity="false">-->
+<!--            <AppenderRef ref="Console"/>-->
+<!--            <AppenderRef ref= "TestLogFile"/> &lt;!&ndash;"async_appender"&ndash;&gt;-->
+<!--        </Logger>-->
+    </Loggers>
+
+</Configuration>
