@@ -96,6 +96,13 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
                 <configuration>
+                    <!-- Cucumber runs in parallel threads https://maven.apache.org/surefire/maven-surefire-plugin/test-mojo.html -->
+                    <useFile>false</useFile>
+                    <testFailureIgnore>false</testFailureIgnore>
+                    <parallel>methods</parallel>
+                    <threadCount>10</threadCount>
+                    <perCoreThreadCount>true</perCoreThreadCount>
+                    <!-- end -->
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                         -Dcucumber.plugin="io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm"
