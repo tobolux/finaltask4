@@ -4,6 +4,8 @@ import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
+import pages.TestPageAuthForm;
+import webdriver.SharedDriver;
 import webdriver.WebDriverManager;
 
 import io.cucumber.java.After;
@@ -20,6 +22,11 @@ import java.io.IOException;
  */
 public class Hooks {
     public final Logger log = LogManager.getLogger(getClass());
+    private TestPageAuthForm TpafPO;
+
+    public Hooks(SharedDriver driver, TestPageAuthForm TpafPO) {
+        this.TpafPO=TpafPO;
+    }
 
     /**
      *
@@ -28,7 +35,7 @@ public class Hooks {
     @Before(value="@allGUITests")
     public void beforeGUIScenario(Scenario scenario) {
         log.info("Запуск GUI сценария {}", scenario.getName());
-        WebDriverManager.initDriver();
+        TpafPO.get();
     }
 
     /**
@@ -61,7 +68,7 @@ public class Hooks {
     @After(value="@allGUITests")
     public void afterGUIScenario(Scenario scenario) {
         log.info("GUI Cценарий {} завершен", scenario.getName());
-        WebDriverManager.quit();
+//        WebDriverManager.quit();
     }
 
     /**
