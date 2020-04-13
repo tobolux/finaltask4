@@ -1,4 +1,3 @@
-
 import webdriver.Properties;
 
 import io.qameta.allure.Allure;

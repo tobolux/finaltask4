@@ -62,7 +62,6 @@ public class Hooks {
     public void afterGUIScenario(Scenario scenario) {
         log.info("GUI Cценарий {} завершен", scenario.getName());
         WebDriverManager.quit();
-//        getLog(System.getProperty("log.filename"));
     }
 
     /**
@@ -72,7 +71,6 @@ public class Hooks {
     @After(value="@allAPITests")
     public void afterAPIScenario(Scenario scenario) {
         log.info("API Cценарий {} завершен", scenario.getName());
-//        getLog(System.getProperty("log.filename"));
     }
 
 

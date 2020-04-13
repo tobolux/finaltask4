@@ -6,6 +6,7 @@ import org.openqa.selenium.*;
 
 import java.io.File;
 import java.lang.reflect.Field;
+import java.util.List;
 
 import org.openqa.selenium.support.PageFactory;
 import webdriver.WebDriverManager;
@@ -90,28 +91,28 @@ public abstract class TestPage {
         throw new IllegalArgumentException("ERROR: there is no such element with name " + cucumberElementName + " at page " + this.getClass().getName());
     }
 
-//
-//    public List<WebElement> getCollection(String cucumberElementName)
-//    {
-//        Class<?> clazz = this.getClass();
-//        for (Field field : clazz.getDeclaredFields())
-//        {
-//            if (field.isAnnotationPresent(NameOfElement.class))
-//            {
-//                NameOfElement nameOfElementAnnotation = field.getAnnotation(NameOfElement.class);
-//                if (nameOfElementAnnotation.value().equals(cucumberElementName))
-//                {
-//                    try
-//                    {
-//                        return (List<WebElement>) field.get(this);
-//
-//                    } catch (IllegalAccessException e)
-//                    {
-//                        logger.error("ERROR: element with name " + cucumberElementName + " at page " + this.getClass().getName() + " is not public");
-//                    }
-//                }
-//            }
-//        }
-//        throw new IllegalArgumentException("ERROR: there is no such element with name " + cucumberElementName + " at page " + this.getClass().getName());
-//    }
+
+    public List<WebElement> getCollection(String cucumberElementName)
+    {
+        Class<?> clazz = this.getClass();
+        for (Field field : clazz.getDeclaredFields())
+        {
+            if (field.isAnnotationPresent(NameOfElement.class))
+            {
+                NameOfElement nameOfElementAnnotation = field.getAnnotation(NameOfElement.class);
+                if (nameOfElementAnnotation.value().equals(cucumberElementName))
+                {
+                    try
+                    {
+                        return (List<WebElement>) field.get(this);
+
+                    } catch (IllegalAccessException e)
+                    {
+                        log.error("ERROR: element with name " + cucumberElementName + " at page " + this.getClass().getName() + " is not public");
+                    }
+                }
+            }
+        }
+        throw new IllegalArgumentException("ERROR: there is no such element with name " + cucumberElementName + " at page " + this.getClass().getName());
+    }
 }
