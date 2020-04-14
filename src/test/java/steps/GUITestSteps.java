@@ -1,5 +1,7 @@
 package steps;
 
+import entities.PagesProvider;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterTest;
 import pages.TestPageAuthForm;
 import io.qameta.allure.Allure;
@@ -15,6 +17,7 @@ import org.testng.Assert;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import static entities.PagesProvider.getElementOnPage;
 import static java.nio.file.StandardOpenOption.READ;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
@@ -26,6 +29,7 @@ public class GUITestSteps {
     private final Logger log = LogManager.getLogger(getClass());
     private WebDriverWait waiter = WebDriverManager.getWaiter();
     private TestPageAuthForm page = new TestPageAuthForm();
+    private WebElement webElement = null;
 
     /**
      *
@@ -46,13 +50,13 @@ public class GUITestSteps {
         addScreenshot("Страница сайта загружена");
     }
 
-    @И("пользователь нажимает {string}")
-    public void clickLoginFormOpenButton(String name) {
+    @И("на {string} пользователь нажимает {string}")
+    public void clickLoginFormOpenButton(String nameOfPage, String nameOfElement) {
         try {
-            waiter.until(elementToBeClickable(page.get(name)));
-            page.get(name).click();
+            waiter.until(elementToBeClickable(webElement = getElementOnPage(nameOfPage, nameOfElement)));
+            webElement.click();
         } catch (TimeoutException e) {
-            Assert.fail("Кнопка авторизации не доступна! " + e.getMessage());
+            Assert.fail(nameOfElement + " на " + nameOfPage + " не доступна! " + e.getMessage());
         } finally {
             addScreenshot("Вызов окна авторизации");
         }
