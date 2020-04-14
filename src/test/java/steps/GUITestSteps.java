@@ -24,7 +24,6 @@ import java.nio.file.Paths;
 
 public class GUITestSteps {
     private final Logger log = LogManager.getLogger(getClass());
-    private WebDriverWait waiter = WebDriverManager.getWaiter();
     private TestPageAuthForm page = new TestPageAuthForm();
 
     /**
@@ -49,7 +48,6 @@ public class GUITestSteps {
     @И("пользователь нажимает {string}")
     public void clickLoginFormOpenButton(String name) {
         try {
-            waiter.until(elementToBeClickable(page.get(name)));
             page.get(name).click();
         } catch (TimeoutException e) {
             Assert.fail("Кнопка авторизации не доступна! " + e.getMessage());
@@ -61,7 +59,6 @@ public class GUITestSteps {
     @Когда("появилось окно Авторизации")
     public void loginFormDisplayed() {
         try {
-            waiter.until(visibilityOfAllElements(page.authFormTitle, page.authFormUsernameField, page.authFormPasswordField));
         } catch (TimeoutException e) {
             Assert.fail("Окно авторизации не отобразилось! " + e.getMessage());
         } finally {
@@ -72,7 +69,6 @@ public class GUITestSteps {
     @То("пользователь вводит логин \"([^\"]*)\"$")
     public void typeUsername(String username) {
         try {
-            waiter.until(elementToBeClickable(page.authFormUsernameField));
             page.authFormUsernameField.click();
             page.authFormUsernameField.sendKeys(username);
         } catch  (TimeoutException e) {
@@ -85,7 +81,6 @@ public class GUITestSteps {
     @И("пользователь вводит пароль \"([^\"]*)\"$")
     public void typePassword(String password) {
         try {
-            waiter.until(elementToBeClickable(page.authFormPasswordField));
             page.authFormPasswordField.click();
             page.authFormPasswordField.sendKeys(password);
         } catch  (TimeoutException e) {
@@ -98,7 +93,6 @@ public class GUITestSteps {
     @И("пользователь нажимает кнопку Входа")
     public void clickLoginSubmitButton() {
         try {
-            waiter.until(elementToBeClickable(page.authFormSubmitButton));
             page.authFormSubmitButton.click();
         } catch  (TimeoutException e) {
             Assert.fail("Кнопка для авторизации пользователя не доступна для нажатия! " + e.getMessage());
@@ -110,7 +104,6 @@ public class GUITestSteps {
     @Тогда("появилось Сообщение об неправильных учетных данных")
     public void incorrectCredentialsAlert() {
         try {
-            waiter.until(visibilityOfAllElements(page.authFormIncorrectCredentialsAlert));
         } catch  (TimeoutException e) {
             Assert.fail("Не отображается сообщение об неправильных учетных данных " + e.getMessage());
         } finally {
@@ -121,7 +114,6 @@ public class GUITestSteps {
     @Тогда("появилось Сообщение об незаполненных учетных данных")
     public void emptyCredentialsAlert() {
         try {
-            waiter.until(visibilityOfAllElements(page.authFormEmptyCredentialsAlert));
         } catch  (TimeoutException e) {
             Assert.fail("Не отображается сообщение об незаполненных учетных данных " + e.getMessage());
         } finally {
@@ -132,7 +124,6 @@ public class GUITestSteps {
     @Если("отображается Пиктограмма активного пользователя")
     public void activeUserAvatarDisplayed() {
         try {
-            waiter.until(visibilityOfAllElements(page.userAccountFormOpenLink));
         } catch  (TimeoutException e) {
             Assert.fail("Не отображается Пиктограмма активного пользователя " + e.getMessage());
         } finally {
@@ -143,7 +134,6 @@ public class GUITestSteps {
     @И("пользователь нажимает на Пиктограмму активного пользователя")
     public void clickActiveUserAvatar() {
         try {
-            waiter.until(elementToBeClickable(page.userAccountFormOpenLink));
             page.userAccountFormOpenLink.click();
         } catch  (TimeoutException e) {
             Assert.fail("Пиктограмма активного пользователя не доступна для нажатия" + e.getMessage());
@@ -155,7 +145,6 @@ public class GUITestSteps {
     @И("пользователь проверяет что в Заголовке личного кабинета отображается имя \"([^\"]*)\"$")
     public void activeUserTitleDisplayed(String username) {
         try {
-            waiter.until(textToBePresentInElement(page.userAccountFormTitle,username));
         } catch  (TimeoutException e) {
             Assert.fail("Не отображается имя активного пользователя в Заголовке личного кабинета " + e.getMessage());
         } finally {
@@ -166,7 +155,6 @@ public class GUITestSteps {
     @Тогда("пользователь нажимает на кнопку Выхода из учетной записи")
     public void exitActiveUserAccount() {
         try {
-            waiter.until(elementToBeClickable(page.userAccountExitButton));
             page.userAccountExitButton.click();
             page.browserAlertAccept();
         } catch  (TimeoutException e) {
