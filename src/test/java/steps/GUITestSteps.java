@@ -1,29 +1,17 @@
 package steps;
 
-import entities.PagesProvider;
 import org.openqa.selenium.WebElement;
-import org.testng.annotations.AfterTest;
 import pages.TestPageAuthForm;
 import io.qameta.allure.Allure;
 import io.cucumber.java.ru.*;
-
-import webdriver.WebDriverManager;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
-
 import org.testng.Assert;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import static entities.PagesProvider.getElementOnPage;
-import static java.nio.file.StandardOpenOption.READ;
-import static org.openqa.selenium.support.ui.ExpectedConditions.*;
-
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
 
 public class GUITestSteps {
     private final Logger log = LogManager.getLogger(getClass());
@@ -51,9 +39,8 @@ public class GUITestSteps {
 
     @И("на {string} пользователь нажимает {string}")
     public void clickLoginFormOpenButton(String nameOfPage, String nameOfElement) {
-        try         
-           getElementOnPage(nameOfPage, nameOfElement).click();
-
+        try {
+            getElementOnPage(nameOfPage, nameOfElement, page).click();
         } catch (TimeoutException e) {
             Assert.fail(nameOfElement + " на " + nameOfPage + " не доступна! " + e.getMessage());
         } finally {

@@ -6,8 +6,6 @@ import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import pages.TestPageAuthForm;
 import webdriver.SharedDriver;
-import webdriver.WebDriverManager;
-
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -68,7 +66,6 @@ public class Hooks {
     @After(value="@allGUITests")
     public void afterGUIScenario(Scenario scenario) {
         log.info("GUI Cценарий {} завершен", scenario.getName());
-//        WebDriverManager.quit();
     }
 
     /**

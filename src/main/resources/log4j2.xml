@@ -26,11 +26,6 @@
             </Policies>
         </RollingFile>
 
-<!--        <Async name="async_appender">-->
-<!--            <AppenderRef ref="TestLogFile" />-->
-<!--            <AppenderRef ref="CalcLogFile" />-->
-<!--        </Async>-->
-
     </Appenders>
 
 
@@ -42,10 +37,6 @@
             <AppenderRef ref="GuiTestRunLog"/>
         </Root>
 
-<!--        <Logger name= "org.example.TestFib" level="TRACE" additivity="false">-->
-<!--            <AppenderRef ref="Console"/>-->
-<!--            <AppenderRef ref= "TestLogFile"/> &lt;!&ndash;"async_appender"&ndash;&gt;-->
-<!--        </Logger>-->
     </Loggers>
 
 </Configuration>
