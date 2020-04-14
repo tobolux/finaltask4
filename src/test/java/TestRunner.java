@@ -1,3 +1,4 @@
+import entities.AbstractTestNGCucumberParallelTests;
 import webdriver.Properties;
 
 import io.qameta.allure.Allure;
@@ -21,7 +22,7 @@ import static java.nio.file.StandardOpenOption.READ;
 /**
  * Класс для запуска API-тестов
  */
-public class TestRunner extends AbstractTestNGCucumberTests {
+public class TestRunner extends AbstractTestNGCucumberParallelTests {
 
     private static Logger log;
     static {
@@ -38,23 +39,6 @@ public class TestRunner extends AbstractTestNGCucumberTests {
     @AfterClass
     public void afterClass() {
         log.info("класс капут");
-//        getLog(System.getProperty("log.filename"));
     }
 
-//    /**
-//     *
-//     * @param fileName String
-//     */
-//    private void getLog(String fileName)  {
-//        try {
-//            log.debug("Чтение логов тестирования из файла {}", fileName);
-//            Allure.addAttachment("Лог-файл прогона тестов"
-//                    ,"text/plain"
-//                    , Files.newInputStream(Paths.get("logs/test.log"),READ)
-//                    ,".txt"
-//            );
-//        } catch (IOException e) {
-//            log.error("Ошибка чтения лога из файла {}: {}", fileName, e.getMessage());
-//        }
-//    }
 }
