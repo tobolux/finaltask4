@@ -40,7 +40,7 @@ public class GUITestSteps {
     @И("на {string} пользователь нажимает {string}")
     public void clickLoginFormOpenButton(String nameOfPage, String nameOfElement) {
         try {
-            getElementOnPage(nameOfPage, nameOfElement).click();
+            getElementOnPage(nameOfPage, nameOfElement, page).click();
         } catch (TimeoutException e) {
             Assert.fail(nameOfElement + " на " + nameOfPage + " не доступна! " + e.getMessage());
         } finally {
