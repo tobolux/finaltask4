@@ -36,8 +36,6 @@ public class WebDriverManager {
      */
     private static void initChromeDriver() throws UnreachableBrowserException {
         System.setProperty("webdriver.chrome.driver", System.getProperty("chrome.driver.path"));
-        //ChromeOptions option = new ChromeOptions();
-        //option.addArguments("--window-size=1360,768");
         driver = new ChromeDriver();
     }
 
