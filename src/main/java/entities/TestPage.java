@@ -9,15 +9,15 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import org.openqa.selenium.support.PageFactory;
-import webdriver.WebDriverManager;
+import org.openqa.selenium.support.ui.LoadableComponent;
+import pages.TestPageAuthForm;
+import webdriver.DriverFactory;
 
-public abstract class TestPage {
+public class TestPage extends LoadableComponent<TestPageAuthForm> {
     private final Logger log = LogManager.getLogger(getClass());
-    private WebDriver driver;
 
     public TestPage() {
-        driver = WebDriverManager.getDriver();
-        PageFactory.initElements(driver, this);
+        PageFactory.initElements(DriverFactory.getDriver(), this);
     }
 
     /**
@@ -25,7 +25,7 @@ public abstract class TestPage {
      * @param url String
      */
     public void openPage(String url) {
-        driver.get(url);
+        DriverFactory.getDriver().get(url);
         log.trace("Выполнен вход на страницу: " + url);
     }
 
@@ -34,7 +34,7 @@ public abstract class TestPage {
      * @return File
      */
     public File getScreenshot() {
-        return ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        return ((TakesScreenshot)DriverFactory.getDriver()).getScreenshotAs(OutputType.FILE);
     }
 
     /**
@@ -44,8 +44,8 @@ public abstract class TestPage {
     public String browserAlertAccept() {
         String alertText;
         try {
-            alertText = driver.switchTo().alert().getText();
-            driver.switchTo().alert().accept();
+            alertText = DriverFactory.getDriver().switchTo().alert().getText();
+            DriverFactory.getDriver().switchTo().alert().accept();
         } catch (NoAlertPresentException e) {
             log.error("No expected Alert present: {}", e.getMessage());
             alertText = null;
@@ -60,8 +60,8 @@ public abstract class TestPage {
     public String browserAlertDismiss() {
         String alertText;
         try {
-            alertText = driver.switchTo().alert().getText();
-            driver.switchTo().alert().dismiss();
+            alertText = DriverFactory.getDriver().switchTo().alert().getText();
+            DriverFactory.getDriver().switchTo().alert().dismiss();
         } catch (NoAlertPresentException e) {
             log.error("No expected Alert present: {}", e.getMessage());
             alertText = null;
@@ -114,5 +114,15 @@ public abstract class TestPage {
             }
         }
         throw new IllegalArgumentException("ERROR: there is no such element with name " + cucumberElementName + " at page " + this.getClass().getName());
+    }
+
+    @Override
+    protected void load() {
+
+    }
+
+    @Override
+    protected void isLoaded() throws Error {
+
     }
 }
