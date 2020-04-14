@@ -2,7 +2,6 @@ package pages;
 
 import entities.TestPage;
 import entities.NameOfElement;
-
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.WebElement;

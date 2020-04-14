@@ -7,15 +7,17 @@ public class PagesProvider {
 
     private static TestPageAuthForm pageAuthForm;
 
-    public static WebElement getElementOnPage (String nameOfPage, String nameOfElement) {
+    public static WebElement getElementOnPage (String nameOfPage, String nameOfElement) throws NullPointerException {
 
-        WebElement webElement = null;
+        WebElement webElement=null;
 
         switch (nameOfPage){
             case "Страница_авторизации":
                 webElement = pageAuthForm.get(nameOfElement);
+                break;
+            default: webElement=null;
         }
-        return webElement;
 
+        return webElement;
     }
 }
