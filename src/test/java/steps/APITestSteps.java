@@ -99,4 +99,6 @@ public class APITestSteps {
         storage.put(RESPONSE,resp);
         log.debug("Добаленный объект удаляется запросом DELETE");
     }
+
+
 }
